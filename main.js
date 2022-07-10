@@ -27,23 +27,27 @@ function animate(time) {
   cars.forEach((c) => c.update(road.borders, traffic));
   myCar.update(road.borders, traffic);
 
+  const bestCar = cars.find((c) => c.y === Math.min(...cars.map((c) => c.y)));
+  const targetCar = bestCar;
+
   carCanvas.height = window.innerHeight;
   networkCanvas.height = window.innerHeight;
 
   carCtx.save();
-  carCtx.translate(0, -myCar.y + carCanvas.height * 0.8);
+  carCtx.translate(0, -targetCar.y + carCanvas.height * 0.8);
   road.draw(carCtx);
   traffic.forEach((c) => c.draw(carCtx, "red"));
 
   carCtx.globalAlpha = 0.2;
   cars.forEach((c) => c.draw(carCtx, "blue"));
   carCtx.globalAlpha = 1;
+  bestCar.draw(carCtx, "blue", true);
 
-  myCar.draw(carCtx, "blue");
+  myCar.draw(carCtx, "green", true);
 
   carCtx.restore();
 
   networkCtx.lineDashOffset = -time / 50;
-  Visualizer.drawNetwork(networkCtx, myCar.brain);
+  Visualizer.drawNetwork(networkCtx, targetCar.brain);
   requestAnimationFrame(animate);
 }
