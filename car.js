@@ -4,13 +4,14 @@ class Car {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.angle = 0;
 
     this.speed = 0;
     this.acceleration = 0.2;
     this.maxSpeed = 10;
     this.friction = 0.05;
 
-    this.angle = 0;
+    this.damaged = false;
 
     this.sensor = new Sensor(this);
     this.controls = new Controls();
@@ -19,7 +20,17 @@ class Car {
   update(roadBorders) {
     this.#move();
     this.polygon = this.#createPolygon();
+    this.damaged = this.#assessDamage(roadBorders);
     this.sensor.update(roadBorders);
+  }
+
+  #assessDamage(roadBorders) {
+    for (let i = 0; i < roadBorders.length; i++) {
+      if (polysIntersect(this.polygon, roadBorders[i])) {
+        return true;
+      }
+    }
+    return false;
   }
 
   #createPolygon() {
@@ -95,6 +106,11 @@ class Car {
 
     // ctx.restore();
 
+    if (this.damaged) {
+      ctx.fillStyle = "gray";
+    } else {
+      ctx.fillStyle = "black";
+    }
     ctx.beginPath();
     ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
     for (let i = 0; i < this.polygon.length; i++) {
