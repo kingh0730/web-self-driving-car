@@ -19,7 +19,7 @@ class Sensor {
 
   #getReading(ray, roadBorders) {
     let touches = [];
-    for (let i = 0; i < this.roadBorders.length; i++) {
+    for (let i = 0; i < roadBorders.length; i++) {
       const touch = getIntersection(
         ray[0],
         ray[1],
