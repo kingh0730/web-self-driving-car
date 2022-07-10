@@ -8,12 +8,13 @@ const car = new Car(road.getLaneCenter(1), 100, 30, 50);
 animate();
 
 function animate() {
+  car.update(road.borders);
+
   canvas.height = window.innerHeight;
 
   ctx.save();
   ctx.translate(0, -car.y + canvas.height * 0.8);
   road.draw(ctx);
-  car.update(road.borders);
   car.draw(ctx);
 
   ctx.restore();
