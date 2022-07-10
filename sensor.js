@@ -19,6 +19,7 @@ class Sensor {
 
   #getReading(ray, roadBorders, traffic) {
     let touches = [];
+
     for (let i = 0; i < roadBorders.length; i++) {
       const touch = getIntersection(
         ray[0],
@@ -30,6 +31,7 @@ class Sensor {
         touches.push(touch);
       }
     }
+
     for (let i = 0; i < traffic.length; i++) {
       const poly = traffic[i].polygon;
       for (let j = 0; j < poly.length; j++) {
@@ -45,7 +47,7 @@ class Sensor {
       }
     }
 
-    if (!touches.length) {
+    if (!touches) {
       return null;
     } else {
       const offsets = touches.map((e) => e.offset);
