@@ -1,4 +1,4 @@
-const canvas = document.getElementById("myCanvas");
+const canvas = document.getElementById("carCanvas");
 canvas.width = 200;
 
 const ctx = canvas.getContext("2d");
