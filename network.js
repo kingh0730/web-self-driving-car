@@ -55,4 +55,25 @@ class Level {
 
     return level.outputs;
   }
+
+  static mutate(network, mutate_how_much = 1) {
+    network.levels.forEach((level) => {
+      for (let i = 0; i < level.biases.length; i++) {
+        level.biases[i] = lerp(
+          level.biases[i],
+          Math.random() * 2 - 1,
+          mutate_how_much
+        );
+      }
+      for (let i = 0; i < level.weights.length; i++) {
+        for (let j = 0; j < level.weights[i].length; j++) {
+          level.weights[i][j] = lerp(
+            level.weights[i][j],
+            Math.random() * 2 - 1,
+            mutate_how_much
+          );
+        }
+      }
+    });
+  }
 }
