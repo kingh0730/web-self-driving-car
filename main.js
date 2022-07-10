@@ -17,8 +17,8 @@ function animate() {
   ctx.save();
   ctx.translate(0, -car.y + canvas.height * 0.8);
   road.draw(ctx);
-  traffic.forEach((c) => c.draw(ctx));
-  car.draw(ctx);
+  traffic.forEach((c) => c.draw(ctx, "red"));
+  car.draw(ctx, "blue");
 
   ctx.restore();
   requestAnimationFrame(animate);
