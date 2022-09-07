@@ -27,7 +27,7 @@ async function consume() {
         if (item === null) {
             break;
         } else if (item === undefined) {
-            await printAsync(0);
+            await new Promise((resolve) => { setTimeout(() => resolve(null)) });
             continue;
         }
         await printAsync(10);
@@ -36,6 +36,7 @@ async function consume() {
 }
 
 async function main() {
+    console.log("start")
     await Promise.all([produce(), consume()])
     console.log("done")
 }
